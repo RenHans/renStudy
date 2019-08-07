@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../plugins/jquery/jQuery.min.js"></script>
+</head>
+<style>
+    .main{
+        width: 60%;
+        background: rgba(255,255,255,0.6);
+        margin: auto;
+        padding: 30px;
+        z-index: 10;
+    }
+    .box{
+        margin:auto;
+        margin-top:15px;
+        border:1px solid #eee;
+        padding:10px 20px;
+        box-shadow:2px 2px 3px #aaaaaa;
+        z-index: 99;
+        background: #fff;
+        border-radius: 5px;
+    }
+    .box>div{
+        margin:5px;
+        font-size: 16px;
+        line-height: 30px;
+    }
+
+    .canvas {
+        position: fixed;
+        z-index: -99;
+        top:0;
+        left:0;
+    }
+
+    .answer{
+        color:dodgerblue;
+        cursor: pointer;
+    }
+    .answerContent {
+        display: none;
+    }
+</style>
+<body>
+<canvas id="canvas" class="canvas"></canvas>
+<div class="main">
+    <section class="box">
+        <h3>
+            1.问：（滴滴、饿了么）写 React / Vue 项目时为什么要在列表组件中写 key，其作用是什么？
+        </h3>
+        <div>
+            <span class="answer">答：</span>
+            <span class="answerContent">不带有key，并且使用简单的模板，基于这个前提下，可以更有效的复用节点，diff速度来看也是不带key更加快速的，因为带key在增删节点上有耗时。这就是vue文档所说的默认模式。但是这个并不是key作用，而是没有key的情况下可以对节点就地复用，提高性能。这种模式会带来一些隐藏的副作用，比如可能不会产生过渡效果，或者在某些节点有绑定数据（表单）状态，会出现状态错位。VUE文档也说明了。还有就是key的作用是为了在diff算法执行时更快的找到对应的节点，提高diff速度，但是这个含有争议。
+        </span>
+       </div>
+    </section>
+
+    <section class="box">
+        <h3>
+            2.问：`['1', '2', '3'].map(parseInt)` what & why ?
+        </h3>
+        <div>
+            <span class="answer">答：</span>
+            <span class="answerContent">
+             [1, NaN, NaN], 原因如下:['1', '2', '3'].map(parseInt)实际为：<br>
+             ['1','2','3'].map((value,index,array) => parseInt(string,index))
+             对于parseInt的传参是parseInt(value,radix) <br>
+             string: 需要转化的字符，如果不是字符串会被转换，忽视空格符。<br>
+             radix：数字2-36之前的整型(为0是则为默认,根据string格式判断而定)。默认使用10，表示十进制。这个参数的意义是指把前面的字符看作是多少进制的数字，所谓的基数。<br>
+            如果字符串 string 以"0x"或者"0X"开头, 则基数是16 (16进制).
+            如果字符串 string 以"0"开头, 基数是8（八进制）或者10（十进制），那么具体是哪个基数由实现环境决定。ECMAScript 5 规定使用10，但是并不是所有的浏览器都遵循这个规定。因此，永远都要明确给出radix参数的值。
+            如果字符串 string 以其它任何值开头，则基数是10 (十进制)。<br>
+            所以map 的时候实际运行的是：<br>
+                parseInt('1','0');（进入默认）结果为：1<br>
+                parseInt('2','1');（没有该禁止）结果为：NaN<br>
+                parseInt('3','2');（二进制里没有3这个数）结果为：NaN<br>
+            </span>
+
+        </div>
+    </section>
+</div>
+
+<script>
+    //-----答案区
+    console.log('--2--begin---------')
+      console.log(['1', '2', '3'].map(parseInt))
+    console.log('--2--end---------')
+
+    //-----背景区域
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d')
+    canvas.height = 2000;
+    canvas.width = window.innerWidth;
+    var texts = '01234567890'.split('');
+    var fontSize = 16;
+    var columns = canvas.width/fontSize;
+    var drop = [];
+    for(var i = 0;i< columns;i++){
+      drop[i] = 1
+    }
+    function draw(){
+      ctx.fillStyle = 'rgba(0,0,0,0.05)';
+      ctx.fillRect(0,0,canvas.width,canvas.height)
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + 'px arial';
+      for(var i = 0;i<drop.length;i++){
+        var text = texts[Math.floor(Math.random()*texts.length)]
+        ctx.fillText(text,i*fontSize,drop[i]*fontSize)
+        if(Math.random()>0.95 || drop[i]*fontSize > canvas.height){
+          drop[i] = 0
+        }
+        drop[i]++
+      }
+    }
+    setInterval(draw,33)
+
+    //-----功能区
+    $(function(){
+      $('.answer').click((e)=>{
+        var status = $(e.target).next().css('display')
+        if (status === 'none') {
+          $(e.target).next().css('display','inline')
+        } else {
+          $(e.target).next().css('display','none')
+        }
+      })
+    })
+
+</script>
+</body>
+</html>

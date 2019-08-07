@@ -6,8 +6,9 @@
 </head>
 <body>
 <script>
+    // --------1
     var a = 10
-
+    // ---1
     function foo () {
       console.log(a); // ??
       var a = 20
@@ -16,8 +17,13 @@
       console.log(a); // ??
       let a = 20
     }
-
-    foo_1();
+    // ---------2
+    var array = [];
+    for(var i = 0; i <3; i++) {
+      array.push(() => i);
+    }
+    var newArray = array.map(el => el());
+    console.log(newArray); // ??
 
 
 </script>
