@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="../plugins/jquery/jQuery.min.js"></script>
+    <title>任瀚的学习空间</title>
+    <link rel="stylesheet" href="../plugins/highlight/css/paraiso-dark.css">
 </head>
 <style>
+
     .main{
         width: 60%;
         background: rgba(255,255,255,0.6);
@@ -47,6 +48,7 @@
 <body>
 <canvas id="canvas" class="canvas"></canvas>
 <div class="main">
+    <!--文章转载 高级前端进阶 木易杨 的文章《前端面试 100 题：能搞懂80%的请把简历给我》，答案是学习时候自己百度并学习的过程总结的，自己总结做一遍比简单看看有意义的多-->
     <section class="box">
         <h3>
             1.问：（滴滴、饿了么）写 React / Vue 项目时为什么要在列表组件中写 key，其作用是什么？
@@ -81,20 +83,91 @@
 
         </div>
     </section>
-</div>
+    <section class="box">
+        <h3>
+            3.问：什么是防抖和节流？有什么区别？如何实现？
+        </h3>
+        <div>
+            <span class="answer">答：</span>
+            <span class="answerContent">
+            防抖：触发高频事件后 n 秒内函数只会执行一次，如果 n 秒内高频事件再次被触发，则重新计算时间；<br>
+                例：input输入框的change事件，不用每次变化都触发请求等事件（input搜索框远程搜索事件）
+             <pre >
+                 <code class="javascript">
+                function debounce(fn) {
+                    let timeout = null; // 创建一个标记用来存放定时器的返回值
+                    return function () {
+                        clearTimeout(timeout); // 每当用户输入的时候把前一个 setTimeout clear 掉
+                        timeout = setTimeout(() => {
+                        // 然后又创建一个新的 setTimeout, 这样就能保证输入字符后的 interval
+                           间隔内如果还有字符输入的话，就不会执行 fn 函数
+                          fn.apply(this, arguments);
+                        }, 500);
+                    };
+                  }
+                function sayHi() {
+                    console.log('防抖成功');
+                }
+                var inp = document.getElementById('inp');
+                inp.addEventListener('input', debounce(sayHi)); // 防抖
+                     </code>
+             </pre>
+            节流:高频事件触发，但在 n 秒内只会执行一次，所以节流会稀释函数的执行频率。<br>
+                例：防止确定按钮短时间重复点击<br>
+            思路：每次触发事件时都判断当前是否有等待执行的延时函数。<br>
+                <pre>
+                    <code class="javascript">
+                       function throttle(fn) {
+                         let canRun = true; // 通过闭包保存一个标记
+                         return function () {
+                           if (!canRun) return; // 在函数开头判断标记是否为 true，不为 true 则 return
+                           canRun = false; // 立即设置为 false
+                           setTimeout(() => { // 将外部传入的函数的执行放在 setTimeout 中
+                             fn.apply(this, arguments);
+                             // 最后在 setTimeout 执行完毕后再把标记设置为 true(关键) 表示可以执行下一次循环了。当定时器没有执行的时候标记永远是 false，在开头被 return 掉
+                             canRun = true;
+                           }, 500);
+                         };
+                       }
+                       function sayHi(e) {
+                         console.log(e.target.innerWidth, e.target.innerHeight);
+                       }
+                       window.addEventListener('resize', throttle(sayHi));
+                    </code>
+                </pre>
+            </span>
+        </div>
+    </section>
+    <section class="box">
+        <h3>
+            3.问：介绍下 Set、Map、WeakSet 和 WeakMap 的区别？
+        </h3>
+        <div>
+            <span class="answer">答：</span>
+            <span class="answerContent">
+                此问题答案较长，详读点击   <a target="_blank" href="https://blog.csdn.net/qq_34543438/article/details/97136068">这里</a>
+            </span>
+        </div>
+    </section>
 
+
+</div>
+<script src="../plugins/jquery/jQuery.min.js"></script>
+<script src="../plugins/highlight/js/highlight.pack.js"></script>
 <script>
-    //-----答案区
+    //-----答案区测试
     console.log('--2--begin---------')
       console.log(['1', '2', '3'].map(parseInt))
     console.log('--2--end---------')
+
+
 
     //-----背景区域
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d')
     canvas.height = 2000;
     canvas.width = window.innerWidth;
-    var texts = '01234567890'.split('');
+    var texts = '01234567890renhan'.split('');
     var fontSize = 16;
     var columns = canvas.width/fontSize;
     var drop = [];
@@ -108,6 +181,13 @@
       ctx.font = fontSize + 'px arial';
       for(var i = 0;i<drop.length;i++){
         var text = texts[Math.floor(Math.random()*texts.length)]
+        var num = Math.random()
+        if(num < 0.001) {
+          text = '任瀚'
+        } else if (num < 0.005) {
+          text = '温涵'
+        }
+
         ctx.fillText(text,i*fontSize,drop[i]*fontSize)
         if(Math.random()>0.95 || drop[i]*fontSize > canvas.height){
           drop[i] = 0
@@ -129,6 +209,9 @@
       })
     })
 
+    window.onload = function () {
+      hljs.initHighlighting();
+    }
 </script>
 </body>
 </html>
