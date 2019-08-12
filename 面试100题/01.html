@@ -49,6 +49,7 @@
 <canvas id="canvas" class="canvas"></canvas>
 <div class="main">
     <!--文章转载 高级前端进阶 木易杨 的文章《前端面试 100 题：能搞懂80%的请把简历给我》，答案是学习时候自己百度并学习的过程总结的，自己总结做一遍比简单看看有意义的多-->
+    <!--1-->
     <section class="box">
         <h3>
             1.问：（滴滴、饿了么）写 React / Vue 项目时为什么要在列表组件中写 key，其作用是什么？
@@ -59,7 +60,7 @@
         </span>
        </div>
     </section>
-
+    <!--2-->
     <section class="box">
         <h3>
             2.问：`['1', '2', '3'].map(parseInt)` what & why ?
@@ -83,6 +84,7 @@
 
         </div>
     </section>
+    <!--3-->
     <section class="box">
         <h3>
             3.问：什么是防抖和节流？有什么区别？如何实现？
@@ -138,14 +140,179 @@
             </span>
         </div>
     </section>
+    <!--4-->
     <section class="box">
         <h3>
-            3.问：介绍下 Set、Map、WeakSet 和 WeakMap 的区别？
+            4.问：介绍下 Set、Map、WeakSet 和 WeakMap 的区别？
         </h3>
         <div>
             <span class="answer">答：</span>
             <span class="answerContent">
+                <pre>
+                    <code class="arta">
+1.set
+dset 可以对数组进行去重，因为它所在的成员都是唯一的
+// 去除数组的重复成员
+[...new Set(array)]
+[...new Set('ababbc')].join('') // 字符串去重
+注意，Set 加入值的时候，不会发生类型转换，它类似于精确相等运算符（===），
+主要的区别是向 Set 加入值时认为NaN等于自身，而精确相等运算符认为NaN不等于自身。
+Set 结构的实例有以下属性。
+Set.prototype.constructor：构造函数，默认就是Set函数。
+Set.prototype.size：返回Set实例的成员总数。
+Set 实例的方法分为两大类：操作方法（用于操作数据）和遍历方法（用于遍历成员）。下面先介绍四个操作方法。
+Set.prototype.add(value)：添加某个值，返回 Set 结构本身。
+Set.prototype.delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。
+Set.prototype.has(value)：返回一个布尔值，表示该值是否为Set的成员。
+Set.prototype.clear()：清除所有成员，没有返回值。
+Set 结构的实例有四个遍历方法，可以用于遍历成员。
+Set.prototype.keys()：返回键名的遍历器
+Set.prototype.values()：返回键值的遍历器
+Set.prototype.entries()：返回键值对的遍历器
+Set.prototype.forEach()：使用回调函数遍历每个成员
+Array.from方法可以将 Set 结构转为数组。
+const items = new Set([1, 2, 3, 4, 5]);
+const array = Array.from(items);
+这就提供了去除数组重复成员的另一种方法。
+
+2.WeakSet
+WeakSet 结构与 Set 类似，也是不重复的值的集合。但是，它与 Set 有两个区别。WeakSet 的成员只能是对象，
+而不能是其他类型的值。其次，WeakSet 中的对象都是弱引用，即垃圾回收机制不考虑 WeakSet 对该对象的引用，
+也就是说，如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存
+在于 WeakSet 之中。之后，有时会忘记取消引用，导致内存无法释放，进而可能会引发内存泄漏。WeakSet 里面的引用，
+都不计入垃圾回收机制，所以就不存在这个问题。因此，WeakSet 适合临时存放一组对象，以及存放跟对象绑定的信息。
+只要这些对象在外部消失，它在 WeakSet 里面的引用就会自动消失。
+ES6 规定 WeakSet 不可遍历。
+WeakSet.prototype.add(value)：向 WeakSet 实例添加一个新成员。
+WeakSet.prototype.delete(value)：清除 WeakSet 实例的指定成员。
+WeakSet.prototype.has(value)：返回一个布尔值，表示某个值是否在 WeakSet 实例之中。
+WeakSet 没有size属性，没有办法遍历它的成员。
+WeakSet 的一个用处，是储存 DOM 节点，而不用担心这些节点从文档移除时，会引发内存泄漏。
+
+3.map
+JavaScript 的对象（Object），本质上是键值对的集合（Hash 结构），但是传统上只能用字符串当作键。
+这给它的使用带来了很大的限制。
+const data = {};
+const element = document.getElementById('myDiv');
+data[element] = 'metadata';
+data['[object HTMLDivElement]'] // "metadata"
+上面代码原意是将一个 DOM 节点作为对象data的键，但是由于对象只接受字符串作为键名，
+所以element被自动转为字符串[object HTMLDivElement]。
+为了解决这个问题，ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，
+各种类型的值（包括对象）都可以当作键。也就是说，Object 结构提供了“字符串—值”的对应，Map 结构提供了
+“值—值”的对应，是一种更完善的 Hash 结构实现。如果你需要“键值对”的数据结构，Map 比 Object 更合适。
+size属性返回 Map 结构的成员总数。
+Map.prototype.set(key, value)
+Map.prototype.get(key)
+Map.prototype.has(key)
+Map.prototype.delete(key)
+
+4.weakMap
+WeakMap与Map的区别有两点。
+首先，WeakMap只接受对象作为键名（null除外），不接受其他类型的值作为键名。
+其次，WeakMap的键名所指向的对象，不计入垃圾回收机制。
+WeakMap 就是为了解决这个问题而诞生的，它的键名所引用的对象都是弱引用，即垃圾回收机制不将该引用考虑在内。
+因此，只要所引用的对象的其他引用都被清除，垃圾回收机制就会释放该对象所占用的内存。也就是说，一旦不再需要，
+WeakMap 里面的键名对象和所对应的键值对会自动消失，不用手动删除引用。
+基本上，如果你要往对象上添加数据，又不想干扰垃圾回收机制，就可以使用 WeakMap。
+一个典型应用场景是，在网页的 DOM 元素上添加数据，就可以使用WeakMap结构。
+当该 DOM 元素被清除，其所对应的WeakMap记录就会自动被移除。
+注意，WeakMap 弱引用的只是键名，而不是键值。键值依然是正常引用.
+WeakMap 与 Map 在 API 上的区别主要是两个，一是没有遍历操作（即没有keys()、values()和entries()方法），
+也没有size属性。因为没有办法列出所有键名，某个键名是否存在完全不可预测，跟垃圾回收机制是否运行相关。
+这一刻可以取到键名，下一刻垃圾回收机制突然运行了，这个键名就没了，为了防止出现不确定性，
+就统一规定不能取到键名。
+二是无法清空，即不支持clear方法。因此，WeakMap只有四个方法可用：get()、set()、has()、delete()。
+                    </code>
+                </pre>
                 此问题答案较长，详读点击   <a target="_blank" href="https://blog.csdn.net/qq_34543438/article/details/97136068">这里</a>
+            </span>
+        </div>
+    </section>
+    <!--5-->
+    <section class="box">
+        <h3>
+            5.问：介绍下深度优先遍历和广度优先遍历，如何实现？
+        </h3>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+                <img src="img/Num05_01.png" alt="" style="width: 90%">
+                <pre>
+                    <code class="arta">
+深度优先算法
+通过深度优先遍历出来的结果是:  A-->B-->D-->H-->E-->C-->F-->G
+深度优先算法过程简要来说是对每一个可能的分支路径深入到不能再深入为止，而且每个节点只能访问一次：
+●首先访问根节点，然后依次从根节点的未被访问的邻接点出发，进行深度优先遍历，直至和根节点有路径相通的节点都被访问。
+●若此时尚有节点未被访问，则从一个未被访问的节点出发，重新进行深度优先遍历，直到所有顶点均被访问过。
+由深度优先算法的规则可知该算法具体实现使用递归实现的。
+
+广度优先算法
+通过广度优先遍历出来的结果是:  ** A-->B-->C-->D-->E-->F-->G-->H**
+广度优先算法是从一个节点开始，根据层次从上到下的遍历节点，在同一层中从左到右遍历节点：
+●首先访问根节点，然后访问距根节点距离为1的顶点。假设有3个节点与根节点相邻，深度优化搜索会在访问根节点后访问这3个节点。
+●在完成访问距根节点距离为1的节点后，将它取出并重复相同的过程。其中哪一个节点是第一个节点，这根据队列的数据结构来处理。
+所以也把广度优化算法称为横向顺序遍历，因为它一层一层地访问节点。广度优化搜索通过队列实现。
+                    </code>
+                </pre>
+                <pre>
+                    <code class="javascript">
+//1.深度优先遍历的递归写法
+function deepTraversal(node){
+    let nodes=[];
+    if(node!=null){
+        nodes.push(node);
+        let childrens=node.children;
+        for(let i=0;i&lt;childrens.length;i++)
+            deepTraversal(childrens[i]);
+    }
+    return nodes;
+}
+
+//2.深度优先遍历的非递归写法
+function deepTraversal(node){
+    let nodes=[];
+    if(node!=null){
+        let stack=[];//同来存放将来要访问的节点
+        stack.push(node);
+        while(stack.length!=0){
+            let item=stack.pop();//正在访问的节点
+            nodes.push(item);
+            let childrens=item.children;
+            for(let i=childrens.length-1;i>=0;i--)//将现在访问点的节点的子节点存入stack，供将来访问
+                stack.push(childrens[i]); //利用到循环和后入先出原理，实现深度
+        }
+    }
+    return nodes;
+}
+
+//3.广度优先遍历的递归写法
+function wideTraversal(node){
+    let nodes=[],i=0;
+    if(node!=null){
+        nodes.push(node);
+        wideTraversal(node.nextElementSibling);
+        node=nodes[i++];
+        wideTraversal(node.firstElementChild);
+    }
+    return nodes;
+}
+
+//4.广度优先遍历的非递归写法
+function wideTraversal(node){
+    let nodes=[],i=0;
+    while(node!=null){
+        nodes.push(node);
+        node=nodes[i++];
+        let childrens=node.children;
+        for(let i=0;i&lt;childrens.length;i++){
+            nodes.push(childrens[i]);
+        }
+    }
+    return nodes;
+}
+                    </code>
+                </pre>
             </span>
         </div>
     </section>
