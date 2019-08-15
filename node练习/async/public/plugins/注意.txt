@@ -1,0 +1,8 @@
+﻿nodemon 启动的文件需要将静态引入文件放在同一个项目里面
+
+//项目中用到的命令
+npm init -y      新建package.json文件
+npm install express --save   安装后端依赖
+npm install -g nodemon  安装nodemon
+
+启动方式：nodemon server

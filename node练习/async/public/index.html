@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Async/await</title>
+    <script src="plugins/vue.js" type="text/javascript"></script>
+    <script src="plugins/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--输入框-->
+    <div style="height: 50px">
+        <input type="text" placeholder="请输入手机号" v-model="phoneNum">
+        <button @click="getFaceResult">确定</button>
+        <button @click="getFaceResultAsync">确定(async)</button>
+    </div>
+    <!--充值画面显示区域-->
+    <div>
+        充值面值：
+        <span v-for="item in faceList" :key="item">
+            {{item}}
+        </span>
+    </div>
+
+</div>
+
+<script>
+    new Vue ({
+      el:'#app',
+      data:{
+        phoneNum:'13880747409',
+        faceList:['20元','30元','50元']
+      },
+      methods:{
+        //点击确定按钮，获取面值列表 // 正常版
+        getFaceResult() {
+            this.getLocation(this.phoneNum)
+            .then(res => {
+              if(res.status === 200 && res.data.success) {
+                let province = res.data.obj.province
+                let city = res.data.obj.city
+
+                this.getFaceList(province,city)
+                .then(res=>{
+                  if(res.status === 200 && res.data.success) {
+                    this.faceList = res.data.obj
+                  }
+                })
+              }
+            })
+          .catch(err => {
+            console.log(err)
+          })
+        },
+        // async 版
+        async getFaceResultAsync() {
+          try {
+            let location = await this.getLocation(this.phoneNum)
+            if(location.data.success) {
+              let province = location.data.obj.province
+              let city = location.data.obj.city
+              let result = await this.getFaceList(province,city)
+              if(result.data.success) {
+                this.faceList = result.data.obj
+              }
+            }
+          } catch (err) {
+            console.log(err)
+          }
+        },
+        // 获取城市信息
+        getLocation(phoneNum) {
+          return axios.post('phoneLocation',{
+            phoneNum
+          })
+        },
+        //获取面值
+        getFaceList(province, city) {
+          return axios.post('/faceList',{
+            province,
+            city
+          })
+        }
+      }
+    })
+</script>
+</body>
+</html>
