@@ -44,3 +44,53 @@ Array.isArray = Array.isArray || isArray;
 function sortAB(arr) {
   arr.sort(function (a,b) {return a-b})
 }
+
+//是不是正则对象
+function isRegExp (value) {
+  return Object.prototype.toString.call(value) === '[Object RegExg]'
+}
+
+//是不是时间对象
+function isDate(value) {
+  return Object.prototype.toString.call(value) === '[object Date]'
+}
+
+//是不是浏览器内置函数
+//内置函数toString后的主体代码块为 [native code] ，而非内置函数则为相关代码，所以非内置函数可以进行拷贝(toString后掐头去尾再由Function转)
+function isNative(value) {
+  return typeof value === 'function' && /native code/.test(value.toString())
+}
+
+//检查是不是函数
+function isFunction(value) {
+  return Object.prototype.toString.call(value) === '[object Function]'
+}
+
+// 检查 value 是不是有效的类数组长度
+function isLength(value) {
+  return typeof value === 'number' && value > -1 && value % 1 == 0 && value <= Number.MAX_SAFE_INTEGER
+}
+
+//检查是否是类数组
+function isArrayLike (valuje) {
+  return value != null && isLength(value.length) && !isFunction(value)
+}
+
+//检查数组是否为空、
+//如果是null，直接返回true；如果是类数组，判断数据长度；如果是Object对象，判断是否具有属性；如果是其他数据，直接返回false(也可改为返回true)
+function isEmpty(value) {
+  if(value == null) {
+    return true
+  }
+  if(isArrayLike(value)) {
+    return !value.length
+  } else if (isPlainObject.call(value, key)) {
+    for (let key in value) {
+      if (hasOwnProperty.call(value,key)){
+        return false
+      }
+    }
+    return true
+  }
+  return false
+}
