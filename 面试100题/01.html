@@ -595,11 +595,141 @@ ES5 继承的写法，从原型链的角度来看更易于理解，但写法上�
             </span>
         </div>
     </section>
+    <!--10-->
+    <section class="box">
+        <h3>
+            10问：异步笔试题
+        </h3>
+        <div>
+                    <pre><code>
+  async function async1() {
+      console.log('async1 start');
+      await async2();
+      console.log('async1 end');
+  }
+  async function async2() {
+      console.log('async2');
+  }
+  console.log('script start');
+  setTimeout(function() {
+      console.log('setTimeout');
+  }, 0)
+  async1();
+  new Promise(function(resolve) {
+      console.log('promise1');
+      resolve();
+  }).then(function() {
+      console.log('promise2');
+  });
+  console.log('script end');
+        </code></pre>
+        </div>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+                <span>
+            script start > async1 start > async2 > promise1 > script end > async1 end > promise2 > setTimeout
+                </span>
+                <span>详解见第8题</span>
+            </span>
+        </div>
+    </section>
+    <!--11-->
+    <section class="box">
+        <h3>
+            11问：算法题 <br>
+            已知如下数组：<br>
+            var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10]; <br>
+            编写一个程序将数组扁平化去并除其中重复部分数据，最终得到一个升序且不重复的数组
+        </h3>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+                <span>1:深度遍历法</span>
+                <pre>
+                    <code>
+var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10];
+var result = []
+function isStatic(value) {
+  return (typeof value === 'string' ||
+          typeof value === 'number' ||
+          typeof value === 'boolean' ||
+          typeof value === 'undefined' ||
+          value === 'null')
+}
+function deep(arr) {
+  if(arr) {
+    for (let key in arr) {
+      if (isStatic(arr[key])) {
+        result.push(arr[key])
+      } else {
+        deep(arr[key])
+      }
+    }
+  }
+}
+deep(arr);
+ result = [...new Set(result)]
+sortAB(result)
+console.log(result,'11-深度遍历法')
+                    </code>
+                </pre>
+                  <div>
+                2:扁平化法
+            </div>
+                <pre>
+                <code>
+var json = JSON.stringify(arr)
+var brr = json.split(',')
+var result_2 = []
+for (var i = 0; i < brr.length; i++) {
+  var num = brr[i].replace(/[^0-9]/g,'')
+  if(JSON.stringify(result_2).indexOf(num.toString()) === -1) {
+    result_2.push(Number(num))
+  }
+}
+sortAB(result_2)
+console.log(result_2,'11-深度遍历法')
+                </code>
+            </pre>
+                <div>
+                3.数组some一维化法:
+            </div>
+                <pre>
+                <code>
+var json = JSON.stringify(arr)
+var brr = json.split(',')
+var result_2 = []
+for (var i = 0; i < brr.length; i++) {
+  var num = brr[i].replace(/[^0-9]/g,'')
+  if(JSON.stringify(result_2).indexOf(num.toString()) === -1) {
+    result_2.push(Number(num))
+  }
+}
+sortAB(result_2)
+console.log(result_2,'11-深度遍历法')
+                </code>
+            </pre>
+                <div>
+                    4.最简洁：
+                </div>
+                <pre>
+                    <code>
+                        // arr.flat(Infinity)可以扁平化数组 Infinity是到最深深度
+                        Array.from(new Set(arr.flat(Infinity))).sort((a,b)=>{ return a-b})
+                    </code>
+                </pre>
+            </span>
+
+        </div>
+    </section>
 
 
 </div>
 <script src="../plugins/jquery/jQuery.min.js"></script>
 <script src="../plugins/highlight/js/highlight.pack.js"></script>
+<script src="../js工具函数/tools.js"></script>
+<script src="11.js"></script>
 <script>
     //-----答案区测试
     console.log('--2--begin---------')

@@ -4,7 +4,7 @@ function isStatic(value) {
           typeof value === 'number' ||
           typeof value === 'boolean' ||
           typeof value === 'undefined' ||
-          typeof value === 'null')
+          value === 'null')
 }
 
 //检测数据是不是原始数据
@@ -20,7 +20,7 @@ function isObject (value) {
 
 //检查value是否类对象。如果是一个类值，那么它不应该是null 而且typeof 后面的结果是 object
 function isObjectLike (value) {
-  return value != null && typeof value == 'object' 
+  return value != null && typeof value == 'object'
 }
 
 //获取数据类型 ，返回结果为 Number 、String ,Object,Array,Date
@@ -39,3 +39,8 @@ function isArray(arr) {
 
 //将isArray挂载到Array 上
 Array.isArray = Array.isArray || isArray;
+
+//数组从小到大排序
+function sortAB(arr) {
+  arr.sort(function (a,b) {return a-b})
+}
