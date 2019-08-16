@@ -94,3 +94,13 @@ function isEmpty(value) {
   }
   return false
 }
+
+//记忆函数：缓存函数的运算结果
+function cached (fn) {
+  let cache = Object.create(null)
+  return function cachedFn(str) {
+    let hit = cache[str]
+    return hit || (cache[str] = fn(str))
+  }
+}
+//需要详细分析一下怎么使用
