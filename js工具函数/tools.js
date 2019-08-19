@@ -95,7 +95,7 @@ function isEmpty(value) {
   return false
 }
 
-//记忆函数：缓存函数的运算结果
+//记忆函数：缓存函数的运算结果 和camelize\hyphenate\captitalize是一起的
 function cached (fn) {
   let cache = Object.create(null)
   return function cachedFn(str) {
@@ -104,3 +104,46 @@ function cached (fn) {
   }
 }
 //需要详细分析一下怎么使用
+//横线转驼峰命名
+let camelizeRE = /-(w)/g;
+function camilize(str) {
+  return str.replace(camelizeRE,function(_,c) {
+    return c ? c.toUpperCase : '';
+  }) 
+}
+let _camelize = cache(camelize)
+
+// 驼峰命名转横线命名
+let hyphenateRE = /B([A-Z])/g;
+function hyphenate(str) {
+  return str.replace(hyphenateRE,'-$1').toLowerCase()
+}
+let _hyphenate = cache(hyphenate);
+
+//字符串首位大写
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+let _capitalize  = cache(capitalize)
+
+//将属性混合到目标对象中
+function extend (to,_from) {
+  for (let key in _from) {
+    to[key] = _from[key]
+  }
+  return to
+}
+
+//对象属性复制，浅拷贝
+Object.assgin = Object.assign || function () {
+  if(arguments.length == 0) throw new TypeError('Cannot convert undefined or null to object');
+  let target = arguments[0],
+  args = Array.prototype.slice.call(arguments,1),
+  key
+  args.forEach(function(item){
+    for (key in item) {
+      item.hasOwnProperty(key) && (target[key] = item[key])
+    }
+  })
+  return target
+}
