@@ -95,7 +95,9 @@ function isEmpty(value) {
   return false
 }
 
-//记忆函数：缓存函数的运算结果 和camelize\hyphenate\captitalize是一起的
+//记忆函数：缓存函数的运算结果
+// 它的实现原理：创建一个对象，将我们所写的东西保存到这个对象中，如果说我们后面再次用到了这个东西，
+// 那么 JavaScript 就不需要再计算一遍了，直接将这个对象中我们需要的东西提取出来e'd
 function cached (fn) {
   let cache = Object.create(null)
   return function cachedFn(str) {
@@ -105,26 +107,27 @@ function cached (fn) {
 }
 //需要详细分析一下怎么使用
 //横线转驼峰命名
-let camelizeRE = /-(w)/g;
-function camilize(str) {
-  return str.replace(camelizeRE,function(_,c) {
-    return c ? c.toUpperCase : '';
-  }) 
+let camelizeRE = /-(\w)/g;
+function camelize(str) {
+  return str.replace(camelizeRE,function(_,s) {
+    console.log(arguments);
+    return s ? s.toUpperCase() : '';
+  })
 }
-let _camelize = cache(camelize)
+let _camelize = cached(camelize)
 
 // 驼峰命名转横线命名
 let hyphenateRE = /B([A-Z])/g;
 function hyphenate(str) {
   return str.replace(hyphenateRE,'-$1').toLowerCase()
 }
-let _hyphenate = cache(hyphenate);
+let _hyphenate = cached(hyphenate);
 
 //字符串首位大写
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
-let _capitalize  = cache(capitalize)
+let _capitalize  = cached(capitalize)
 
 //将属性混合到目标对象中
 function extend (to,_from) {
@@ -146,4 +149,89 @@ Object.assgin = Object.assign || function () {
     }
   })
   return target
+}
+
+/**
+ * 把一个对象的每一项都转化成可观测对象
+ * @param { Object } obj 对象
+ */
+function observable (obj) {
+  if (!obj || typeof obj !== 'object') {
+    return;
+  }
+  let keys = Object.keys(obj);
+  keys.forEach((key) =>{
+    defineReactive(obj,key,obj[key])
+  })
+  return obj;
+}
+/**
+ * 使一个对象转化成可观测对象
+ * @param { Object } obj 对象
+ * @param { String } key 对象的key
+ * @param { Any } val 对象的某个key的值
+ */
+function defineReactive (obj,key,val) {
+  Object.defineProperty(obj, key, {
+    get(){
+      console.log(`${key}属性被读取了`);
+      return val;
+    },
+    set(newVal){
+      console.log(`${key}属性被修改了`);
+      val = newVal;
+    }
+  })
+}
+
+class Dep {
+  constructor() {
+    this.subs = []
+  }
+
+  //增加订阅者
+  addSub(sub) {
+    this.subs.push(sub);
+  }
+
+  //判断是否增加订阅者
+  depend() {
+    if (Dep.target) {
+      this.addSub(Dep.target)
+    }
+  }
+  //通知订阅者更新
+  notify(){
+    this.subs.forEach((sub) =>{
+      sub.update()
+    })
+  }
+}
+Dep.target = null;
+
+function defineReactive2 (obj,key,val) {
+  let dep = new Dep();
+  Object.defineProperty(obj, key, {
+    get(){
+      dep.depend();
+      console.log(`${key}属性被读取了`);
+      return val;
+    },
+    set(newVal){
+      val = newVal;
+      console.log(`${key}属性被修改了`);
+      dep.notify()                    //数据变化通知所有订阅者
+    }
+  })
+}
+
+function observable2 (obj) {
+  if (!obj || typeof obj !== 'object') {
+    return;
+  }
+  let keys = Object.keys(obj);
+  keys.forEach((key) =>{
+    defineReactive2(obj,key,obj[key])
+  })
+  return obj;
 }

@@ -905,6 +905,59 @@ npm 向 registry 查询模块压缩包的网址 <br>
             </span>
         </div>
     </section>
+    <!--26-->
+    <section class="box">
+        <h3>
+            26问：介绍模块化发展历程？
+        </h3>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+                <a target="_blank" href="https://blog.csdn.net/github_37744981/article/details/65629969">简介明了通俗易懂的答案</a>
+            </span>
+        </div>
+    </section>
+    <!--27-->
+    <section class="box">
+        <h3>
+            27问：全局作用域中，用 const 和 let 声明的变量不在 window 上，那到底在哪里？如何去获取？
+        </h3>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+                用let const在声明的时候，是创建了一个遮蔽window同名属性的全局变量，debuger一下就可以看出来用 let const 定义的变量作用域为Script对象中，和Window/Global同级
+                <a target="_blank" href="https://www.jianshu.com/p/501e1633113f">答案一</a>
+                <a target="_blank" href="https://juejin.im/post/5c0be11b6fb9a049df23e388">答案二</a>
+            </span>
+        </div>
+    </section>
+    <!--28-->
+    <section class="box">
+        <h3>
+            28问：cookie 和 token 都存放在 header 中，为什么不会劫持 token？
+        </h3>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+              1.首先token不是防止XSS的，而是为了防止CSRF的；
+              2.CSRF攻击的原因是浏览器会自动带上cookie，而浏览器不会自动带上token
+            </span>
+        </div>
+    </section>
+    <!--29-->
+    <section class="box">
+        <h3>
+            29问：聊聊 Vue 的双向数据绑定，Model 如何改变 View，View 又是如何改变 Model 的?
+        </h3>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+            <a href="https://www.cnblogs.com/wangjiachen666/p/9883916.html">通俗易懂</a>
+            </span>
+        </div>
+    </section>
+
+
 
 
 </div>
