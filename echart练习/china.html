@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="map" style="width: 100%;height: 800px;position: absolute;z-index: 1001;" ></div>
+<script src="../plugins/echart/echarts.min.js"></script>
+ <script src="../plugins/echart/map/js/china.js"></script>
+ <script>
+   //地图渲染
+   var proMap = echarts.init(document.getElementById('map'));
+   proMap.resize();
+   proOption = {
+
+
+
+     roam: false,
+     grid: {
+       left: 'center',
+       top: 'center'
+     },
+     tooltip: {
+       trigger: 'item',
+       formatter: '指数 <br/>{b} : {c} '
+     },
+     dataRange: {
+       show: false,
+       splitList: [
+         {
+           start: 95,
+           end: 100,
+           color:
+             {type: 'linear',
+               x: 0,
+               y: 0,
+               x2: 0,
+               y2: 1,
+               colorStops: [{
+                 offset: 0, color: '#FF4786' // 0% 处的颜色
+               }, {
+                 offset: 1, color: '#FFA500' // 100% 处的颜色
+               }],
+               globalCoord: false // 缺省为 false
+             }
+         },
+         {
+           start: 75,
+           end: 95,
+           color:
+             {type: 'linear',
+               x: 0,
+               y: 0,
+               x2: 0,
+               y2: 1,
+               colorStops: [{
+                 offset: 0, color: '#F38031' // 0% 处的颜色
+               }, {
+                 offset: 1, color: '#F8BB68' // 100% 处的颜色
+               }],
+               globalCoord: false // 缺省为 false
+             }
+         },
+         {
+           start: 60,
+           end: 75,
+           color:
+             {type: 'linear',
+               x: 0,
+               y: 0,
+               x2: 0,
+               y2: 1,
+               colorStops: [{
+                 offset: 0, color: '#6685F6' // 0% 处的颜色
+               }, {
+                 offset: 1, color: '#4DBAFD' // 100% 处的颜色
+               }],
+               globalCoord: false // 缺省为 false
+             }
+         },
+         {
+           start: 0,
+           end: 60,
+           color:
+             {type: 'linear',
+               x: 0,
+               y: 0,
+               x2: 0,
+               y2: 1,
+               colorStops: [{
+                 offset: 0, color: '#00C5E4' // 0% 处的颜色
+               }, {
+                 offset: 1, color: '#00F0BB' // 100% 处的颜色
+               }],
+               globalCoord: false // 缺省为 false
+             }
+         }
+       ]
+     },
+     series: [
+       {
+         name: '',
+         type: 'map',
+         map: 'china',
+         mapType: '中国',
+         roam: false,
+         zoom: 1.25,
+         label: {
+           normal: {
+             show: true
+           },
+           emphasis: {
+             show: false
+           }
+         },
+         itemStyle: {
+           textStyle: {
+             fontWeight: 'normal',
+             color: '#408829'
+           },
+           normal: {
+             borderWidth: 0,
+             areaColor: '#fff',
+             borderColor: '#696969'
+           },
+           emphasis: {
+             areaColor: '#eec3c3'
+           }
+         },
+         data: [
+           {name: '四川',value: 99},
+           {name: '新疆',value: 22},
+           {name: '西藏',value: 66},
+           {name: '云南',value: 66},
+           {name: '贵州',value: 66},
+           {name: '青海',value: 66},
+           {name: '甘肃',value: 55},
+           {name: '陕西',value: 44},
+           {name: '宁夏',value: 44},
+           {name: '内蒙古',value: 44},
+           {name: '重庆',value: 44},
+           {name: '北京',value: 44},
+           {name: '天津',value: 44},
+           {name: '海南',value: 44},
+           {name: '吉林',value: 44},
+           {name: '辽宁',value: 44},
+           {name: '黑龙江',value: 44},
+           {name: '天津',value: 44},
+           {name: '河北',value: 11},
+           {name: '河南',value: 44},
+           {name: '上海',value: 44},
+           {name: '山东',value: 78},
+           {name: '山西',value: 44},
+           {name: '湖南',value: 44},
+           {name: '湖北',value: 44},
+           {name: '江西',value: 44},
+           {name: '江苏',value: 44},
+           {name: '安徽',value: 44},
+           {name: '浙江',value: 44},
+           {name: '福建',value: 44},
+           {name: '广州',value: 86},
+           {name: '台湾',value: 44},
+           {name: '香港',value: 80},
+           {name: '澳门',value: 44},
+           {name: '南海诸岛',value: 44},
+           {name: '广东',value: 80},
+           {name: '广西',value: 44},
+         ]
+       }
+     ]
+   };
+   proMap.setOption(proOption);
+ </script>
+</body>
+</html>
