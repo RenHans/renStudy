@@ -956,7 +956,77 @@ npm 向 registry 查询模块压缩包的网址 <br>
             </span>
         </div>
     </section>
+    <!--30-->
+    <section class="box">
+        <h3>
+            30问：两个数组合并成一个数组
+        </h3>
+        <div>
+            请把两个数组 ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'] 和 ['A', 'B', 'C', 'D']，合并为 ['A1', 'A2', 'A', 'B1', 'B2', 'B', 'C1', 'C2', 'C', 'D1', 'D2', 'D']。
+        </div>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+                <div>循环插值法</div>
+                <pre>
+                    <code>
+var a = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2']
+  var b = ['A','B','C','D']
+  var start1 = 0 ,start2 = 0
+  var result = []
+    for(var i = 1 ;i <= b.length;i++){
+      let arr1 = a.slice(start1,i*2)
+      let arr2 = b.slice(start2,i)
+      start1 = i*2
+      start2 = i
+      result = [...result,...arr1,...arr2]
+    }
+    console.log(result)
+                    </code>
+                </pre>
+                <div>
+                    替换排序法
+                </div>
+                <pre>
+                    <code>
+let a1 =  ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2']
+let a2 = ['A', 'B', 'C', 'D'].map((item) => {
+  return item + 3
+})
 
+let a3 = [...a1, ...a2].sort().map((item) => {
+  if(item.includes('3')){
+    return item.split('')[0]
+  }
+  return item
+})
+console.log(a3,'-30-替换排序法')
+                    </code>
+                </pre>
+            </span>
+        </div>
+    </section>
+    <!--31-->
+    <section class="box">
+        <h3>
+            31问：改造下面的代码，使之输出0 - 9，写出你能想到的所有解法。
+        </h3>
+        <pre>
+            <code>
+for (var i = 0; i< 10; i++){
+    setTimeout(() => {
+        console.log(i);
+    }, 1000)
+}
+            </code>
+        </pre>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+            <a href="https://www.cnblogs.com/wangjiachen666/p/9883916.html">通俗易懂</a>
+            </span>
+        </div>
+    </section>
 
 
 
@@ -965,6 +1035,7 @@ npm 向 registry 查询模块压缩包的网址 <br>
 <script src="../plugins/highlight/js/highlight.pack.js"></script>
 <script src="../js工具函数/tools.js"></script>
 <script src="11.js"></script>
+<script src="30.js"></script>
 <script>
     //-----答案区测试
     console.log('--2--begin---------')
