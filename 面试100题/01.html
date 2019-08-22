@@ -1023,11 +1023,54 @@ for (var i = 0; i< 10; i++){
         <div>
             <div class="answer">答：</div>
             <span class="answerContent">
-            <a href="https://www.cnblogs.com/wangjiachen666/p/9883916.html">通俗易懂</a>
+                <div>解法1</div>
+                <pre>
+                    <code>
+
+for (var i = 0; i< 10; i++){
+   setTimeout((i) => {
+   	  console.log(i);
+   }, 1000,i)
+}
+                    </code>
+                </pre>
+                 <div>解法2</div>
+                <pre>
+                    <code>
+
+for (var i = 0; i< 10; i++){
+  ((i) => {
+    setTimeout(() => {
+      console.log(i);
+    }, 1000)
+ })(i)
+}
+                    </code>
+                </pre>
+                  <div>解法3</div>
+                <pre>
+                    <code>
+
+for (let i = 0; i< 10; i++){
+  setTimeout(() => {
+    console.log(i);
+  }, 1000)
+}
+                    </code>
+                </pre>
             </span>
         </div>
     </section>
-
+    <!--32-->
+    <section class="box">
+        <h3>
+            32问：Virtual DOM 真的比操作原生 DOM 快吗？谈谈你的想法
+        </h3>
+        <div>
+            <div class="answer">答：</div>
+            <a href="https://www.cnblogs.com/chengxs/p/11096747.html">答案</a>
+        </div>
+    </section>
 
 
 </div>
