@@ -1068,10 +1068,35 @@ for (let i = 0; i< 10; i++){
         </h3>
         <div>
             <div class="answer">答：</div>
-            <a href="https://www.cnblogs.com/chengxs/p/11096747.html">答案</a>
+            <span class="answerContent">
+                  <a target="_blank" href="https://www.cnblogs.com/chengxs/p/11096747.html">答案</a>
+            </span>
         </div>
     </section>
+    <!--33-->
+    <section class="box">
+        <h3>
+            33问：下面的代码打印什么内容，为什么？
+        </h3>
+        <pre>
+            <code>
+var b = 10;
+(function b(){
+    b = 20;
+    console.log(b);
+})();
+            </code>
+        </pre>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+                输出undefined，这是一个函数表达式 <br>
+                函数表达式的函数名只在该函数内部有效，且绑定是常量类似 const，不能修改
+                 <a target="_blank" href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/48">讨论在这了</a>
 
+            </span>
+        </div>
+    </section>
 
 </div>
 <script src="../plugins/jquery/jQuery.min.js"></script>
