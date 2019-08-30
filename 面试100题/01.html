@@ -1097,6 +1097,61 @@ var b = 10;
             </span>
         </div>
     </section>
+    <!--34-->
+    <section class="box">
+        <h3>
+            34问：简单改造下面的代码，使之分别打印 10 和 20
+        </h3>
+        <pre>
+            <code>
+var b = 10;
+(function b(){
+    b = 20;
+    console.log(b);
+})();
+            </code>
+        </pre>
+        <div>
+            <div class="answer">答：</div>
+            <span class="answerContent">
+                <div>打印10</div>
+                <pre>
+                    <code>
+var b = 10;
+(function b(b){
+   console.log(b);
+   b = 20;
+})(b);
+                    </code>
+                </pre>
+                <div>打印20</div>
+                <pre>
+                    <code>
+//方法一
+var b = 10;
+(function a(){
+   b = 20;
+   console.log(b);
+})();
+
+//方法二
+var b = 10;
+(function b(){
+   let b = 20;
+   console.log(b);
+})();
+
+//方法三
+var b = 10;
+(function (){
+   b = 20;
+   console.log(b);
+})();
+                    </code>
+                </pre>
+            </span>
+        </div>
+    </section>
 
 </div>
 <script src="../plugins/jquery/jQuery.min.js"></script>
