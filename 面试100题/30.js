@@ -26,3 +26,4 @@ let a3 = [...a1, ...a2].sort().map((item) => {
   return item
 })
 console.log(a3,'-30-替换排序法')
+

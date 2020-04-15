@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <input type="number" id="num" onclick="">
+    <button onclick="translateNum(document.getElementById('num').value)">111</button>
+    <button onclick="con()">222</button>
+    <div id="result" >22</div>
+</div>
+<script>
+    var value = '';
+    var result = '';
+    var str = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0';
+    var i = 0;
+    function translateNum(num) {
+        num = parseInt(num);
+        var remainder = num%36;
+        if(remainder) {
+          result = str.charAt(remainder) + result;
+        } else {
+          result = '0' + result;
+        }
+        if(num > i*36){
+          i++;
+          translateNum(num/36)
+        }
+    }
+    function con(){
+      document.getElementById('result').innerHTML = result;
+      result = "";
+      i=0;
+    }
+
+</script>
+</body>
+</html>
