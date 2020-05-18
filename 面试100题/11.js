@@ -55,5 +55,6 @@ console.log(result_3,'11-some方法平坦数组')
 // every从迭代开始，一旦有一个不符合条件，则不会继续迭代下去。
 
 //最简介
+
 arr = Array.from(new Set(arr.flat(Infinity))).sort((a,b)=>{ return a-b})
 console.log(arr,'11-最简洁')
