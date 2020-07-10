@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>计算字符串最后一个单词的长度，单词以空格隔开。示例：“hello world” 输出5</h3>
+    <script>
+        function getLength(str){
+            let arr = str.split(" ")
+            let lastStr = arr.pop()
+            return lastStr.length
+        }
+        //test
+        let a = getLength('hello world')
+        let b = getLength('work')
+        let c = getLength('he was the fast man')
+        console.log(a,b,c)
+    </script>
+</body>
+</html>

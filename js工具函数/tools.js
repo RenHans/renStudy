@@ -183,7 +183,7 @@ function defineReactive (obj,key,val) {
     }
   })
 }
-
+//观察发布
 class Dep {
   constructor() {
     this.subs = []
@@ -235,3 +235,24 @@ function observable2 (obj) {
   })
   return obj;
 }
+
+
+/**异步处理错误抛出**/
+async function errorCaptured(asyncFunc) {
+  try {
+    let res = await asyncFunc()
+    return [null,res]
+  } catch (e) {
+    return [e,null]
+  }
+}
+
+//使用案例
+async function func() {
+  let [err,res] = errorCaptured(asyncFunc)
+  if(err){
+    //...抛出错误
+  }
+  //...正常流程
+}
+

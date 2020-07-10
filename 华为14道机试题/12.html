@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>将一个英文语句以单词为单位逆序排放。例如“I am a boy”，逆序排放后为“boy a am I”
+    所有单词之间用一个空格隔开，语句中除了英文字母外，不再包含其他字符</h3>
+<script>
+    var str = "god is a girl"
+    function func(str) {
+      let arr = str.split(' ')
+      arr = arr.reverse()
+      return arr.join(' ')
+    }
+    //test
+    console.log(func(str))
+</script>
+</body>
+</html>

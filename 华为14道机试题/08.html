@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>输入一个int型整数，按照从右向左的阅读顺序，返回一个不含重复数字的新的整数。</h3>
+<script>
+    var a = 1928612341
+    function getSet(num){
+      return parseInt([...new Set([...num.toString()].reverse())].join(''))
+    }
+    //test
+    console.log(a)
+    console.log(getSet(a))
+
+</script>
+</body>
+</html>

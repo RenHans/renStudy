@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var a = 0;
+    var b = 0;
+    function A(a) {
+      A = function (b){
+        console.log(a + b++,'----')
+      }
+      console.log(a++,'++++')
+    }
+    A(1)
+    A(2)
+    A(1)
+    A(2)
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>功能:输入一个正整数，按照从小到大的顺序输出它的所有质因子（如180的质因子为2 2 3 3 5 ）
+    最后一个数后面也要有空格</h3>
+<script>
+    function getFactor(num){
+      let i = 2;
+      let arr = [];
+      for(i;i<num;i++){
+        if(num%i === 0){
+          arr.push(i);
+          num = num/i;
+          i = 1
+        }
+      }
+      arr.sort((a,b)=>{return a-b});
+
+      return arr.join(' ') + ' '
+    }
+    //test
+    var a = getFactor(180)
+    var b = getFactor(200)
+    console.log(a)
+    console.log(b)
+</script>
+</body>
+</html>

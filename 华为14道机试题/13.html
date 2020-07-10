@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>给定n个字符串，请对n个字符串按照字典序排列。</h3>
+<script>
+    var str1 = 'dfa'
+    var str2 = 'avw'
+    var str3 = 'deb'
+    /* 喔嚯，sort()就直接能按ascII 排序，自己写的只比较了第一位数，第一位相同时没做处理
+    function func(){
+      let arr = [];
+      for(let i = 0 ;i<arguments.length;i++){
+        let obj = {key:arguments[i].charCodeAt().toString(),value:arguments[i]}
+        arr.push(obj)
+      }
+        arr.sort(function(a,b){return a.key - b.key})
+      for(let j = 0 ;j<arr.length;j++){
+        console.log(arr[j].value)
+      }
+    }
+    */
+
+    function func(){
+      let arr = [...arguments].sort();
+      for(let j = 0 ;j<arr.length;j++){
+        console.log(arr[j])
+      }
+    }
+    func(str1,str2,str3)
+</script>
+</body>
+</html>

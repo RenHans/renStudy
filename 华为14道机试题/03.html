@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>完成“去重”与“排序”</h3>
+<h5>第一组是3个数字,分别是：2,2,1。
+    第二组是11个数字,分别是：10,20,40,32,67,40,20,89,300,400,15。</h5>
+<script>
+    var arr1 = [2,2,1];
+    var arr2 = [10,20,40,32,67,40,20,89,300,400,15];
+    var arr3 = [10,20,40,12,451,123]
+    var arr4 = [4,2,1,2,10,20,33,10]
+     function func(){
+       let arr = [];
+       for(let i = 0 ;i < arguments.length;i++){
+         arr = [...arr,...arguments[i]]
+       }
+       arr = [...new Set(arr)];
+       arr = arr.sort(function(a,b){
+         return a - b
+       });
+       return arr
+     }
+
+     var a = func(arr1)
+     var b = func(arr1,arr2)
+     var c = func(arr1,arr2,arr3)
+     var d = func(arr1,arr2,arr3,arr4)
+    console.log(a)
+    console.log(b)
+    console.log(c)
+    console.log(d)
+
+
+</script>
+</body>
+</html>

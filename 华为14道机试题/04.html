@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>•连续输入字符串，请按长度为8拆分每个字符串后输出到新的字符串数组；
+    •长度不是8整数倍的字符串请在后面补数字0，空字符串不处理。</h3>
+<script>
+    var str1 = "abcdefghijklmn"
+    var str2 = '123456789'
+    function getStr8(str) {
+        let arr = [];
+        let zero = '00000000';
+        let num =  8 - str.length%8
+        str = str + zero.slice(0,num)
+        for(let i = 0 ;i < str.length;i = i+8){
+          arr.push(str.slice(i,i+8))
+        }
+        return arr
+    }
+    //test
+
+    var a = getStr8(str1)
+    var b = getStr8(str2)
+    console.log(a)
+    console.log(b)
+</script>
+</body>
+</html>

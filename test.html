@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+
+  function func(str){
+    let arr = str.split('')
+    let arr_new = [...new Set(arr)]
+    let arr_obj = []
+    for(let i=0;i<arr_new.length;i++){
+      let obj = {count:count(str,arr_new[i]),value:arr_new[i]}
+      arr_obj.push(obj)
+    }
+    arr_obj.sort(function(a,b){return b.count -a.count})
+    arr_obj.sort(function(a,b){
+      if(a.count == b.count){
+        return a.value.charCodeAt() - b.value.charCodeAt()
+      }
+    })
+    //console
+    let str_result = ''
+    for(let j=0;j<arr_obj.length;j++){
+      str_result += arr_obj[j].value + ':' + arr_obj[j].count + ';'
+    }
+    return str_result
+  }
+
+  function count(str,chat){
+    let arr = str.split(chat)
+    return arr.length -1
+  }
+    var str2 = 'bdhwocADFAa'
+  var result = func(str2)
+  console.log(result)
+
+
+    ////
+
+
+
+
+</script>
+</body>
+</html>

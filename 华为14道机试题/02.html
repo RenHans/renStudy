@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>写出一个程序，接受一个由字母和数字组成的字符串，和一个字符，然后输出输入字符串中含有该字符的个数。不区分大小写。</h3>
+    <script>
+        function getRepeatWord (word,letter) {
+            word = word.toLowerCase()
+            letter = letter.toLowerCase()
+            let arr = word.split(letter)
+          return arr.length -1
+        }
+        //test
+        var a = getRepeatWord('repeat','p')
+        var b = getRepeatWord('repeat','E')
+        var c = getRepeatWord('repeat','f')
+        console.log(a,b,c)
+    </script>
+</body>
+</html>

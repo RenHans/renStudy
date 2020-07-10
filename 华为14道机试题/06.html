@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>写出一个程序，接受一个正浮点数值，输出该数值的近似整数值。如果小数点后数值大于等于5,向上取整；小于5，则向下取整。</h3>
+<script>
+  function num(flo){
+        flo = flo.toFixed(0)
+    return flo
+  }
+  //test
+    var a = num(12.123)
+    var b = num(5.523)
+    console.log(a,b)
+</script>
+
+</body>
+</html>
