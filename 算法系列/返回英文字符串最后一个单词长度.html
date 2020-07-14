@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+
+    </div>
+    <script>
+      var lengthOfLastWord = function(s) {
+        let num = 0;
+        if(s) {
+          let arr=s.split(' ')
+          let str = backStr(arr)
+          num = str.length
+        }
+        return num
+      };
+
+      function backStr(arr){
+        if(arr.length>0){
+          var str = arr.pop()
+          if(str == '' ){
+            str = backStr(arr)
+          }
+          return str
+        }
+        return ''
+      }
+
+      console.log(lengthOfLastWord('hello world'))
+      console.log(lengthOfLastWord('a '))
+      console.log(lengthOfLastWord(''))
+      console.log(lengthOfLastWord(' '))
+      console.log(lengthOfLastWord('a b '))
+      console.log(lengthOfLastWord('a b  '))
+
+        //以上为自己解法
+
+        //以下为别人解法
+      var lengthOfLastWordOther = function(s) {
+        let end = s.length - 1;
+        while(end >= 0 && s[end] == ' ') end--;
+        if(end < 0) return 0;
+        let start = end;
+        while(start >= 0 && s[start] != ' ') start--;
+        return end - start;
+      };
+
+    </script>
+</body>
+</html>
