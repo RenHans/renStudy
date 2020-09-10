@@ -13,9 +13,9 @@
         let total = 2 * Max + 1
         for(let i = 0;i < total;i++){
             let str = ''
-            let lienMax = Math.abs(Max-i)
+            let lineMax = Math.abs(Max-i)
             for(let j = 0;j < total;j++){
-                let value = Math.abs(Max-j) < lienMax ? lienMax: Math.abs(Max-j)
+                let value = Math.abs(Max-j) < lineMax ? lineMax: Math.abs(Max-j)
                str += (value + compensation).toString() + ' '
             }
             console.log(str)
