@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function printN(num,Max){
+        let compensation = num - 0 > 0 ?num-0:0
+        num = 0
+        Max = Max-num
+        let total = 2*(Max-num) + 1
+        for(let i = 0;i<total;i++){
+            let str = ''
+            let C = Math.abs(Max-i)
+            for(let j = 0;j<total;j++){
+                let D = Math.abs(Max-j) < C ? C: Math.abs(Max-j)
+               str += (D+compensation).toString() + ' '
+            }
+            console.log(str)
+        }
+    }
+    // function printN(num,max){
+    //     let arr = []
+    //     for(let i = num ;i<max;i++){
+    //         arr.push(i+1)
+    //         arr.unshift(i+1)
+    //     }
+    //     let result = []
+    //     for(let i = num ;i<max;i++){
+    //         let drr = JSON.parse(JSON.stringify(arr))
+    //         for(let j = 0;j<drr.length;j++){
+    //             if(drr[j]<max){
+    //                 drr[j]+= (i+1)
+    //             }
+    //         }
+    //         result.push(drr)
+    //         result.unshift(drr)
+    //     }
+    //     console.log(result)
+    // }
+    // function printN(num,max){
+    //     let arr = [num]
+    // }
+   printN(0,4)
+   printN(1,4)
+   printN(4,9)
+
+</script>
+</body>
+</html>

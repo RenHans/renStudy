@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * params {number}
+     * return {string}
+     * */
+  function translate(num) {
+    let str = num.toString()
+    let index = str.indexOf('.')
+    if(index !== -1 && (str.length - index) > 7 ) {
+      str = str.slice(0,index+8)
+    } else {
+      str = num.toFixed(7).toString()
+    }
+    return str
+  }
+</script>
+</body>
+</html>
