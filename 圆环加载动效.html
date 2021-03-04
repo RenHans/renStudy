@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .rotate-animate {
+            border:16px solid #f3f3f3;
+            border-radius:50%;
+            border-top:16px solid #2842d8;
+            width:100px;
+            height:100px;
+            animation:rotate 2s linear infinite;
+        }
+        .rotate-animate.fill-color {
+            margin-left: 20px;
+            border-color: #2842d8 #d1b516 #cf4928 #27c965;
+        }
+        @keyframes rotate{
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform:rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- html -->
+<div class="rotate-animate"></div>
+<div class="rotate-animate fill-color"></div>
+</body>
+</html>
