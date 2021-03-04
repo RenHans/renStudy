@@ -42,6 +42,10 @@
             background: #161616;
             color:#fff;!important;
         }
+        .self{
+            background: #e9521c;
+            /*color:#fff;!important;*/
+        }
     </style>
 </head>
 <body>
@@ -194,6 +198,24 @@
          }
      }
  })
+ document.oncontextmenu = function(e){
+     return false
+     //或者 e.preventDefault()
+ }
+ document.onmouseup = function(e){
+     if(e.button == 2){
+         if(e.target.className.indexOf('majiang') !== -1) {
+             if(e.target.className.indexOf('mask') !== -1){
+               return
+             }
+             if(e.target.className.indexOf('self') !== -1){
+                 e.target.className = "majiang mask";
+             } else {
+                 e.target.className = "majiang self";
+             }
+         }
+     }
+ }
 </script>
 </body>
 </html>
